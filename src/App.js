@@ -10,8 +10,7 @@ function App() {
   const RESPONSE_TYPE = 'token'
 
   const [token, setToken] = useState('')
-  const [searchKey, setSearchKey] = useState('')
-  let prova;
+
 
   useEffect(()=>{
     const hash = window.location.hash
@@ -25,27 +24,14 @@ function App() {
     setToken(token)
   },[])
 
-  const handlerSubmit = async (e) =>{
-    e.preventDefault()
-    const data = await fetch('https://api.spotify.com/v1/search?q=' +searchKey + '&type=track', {
-      headers: {
-        'Authorization' : `Bearer ${token}`,
-        'Content-type': 'application/json'
-      }
-    }).then(response=>response.json()).then(data=>console.log(data))
-  }
-  console.log(handlerSubmit)
-
   return (
     <div className="App">
+      {!token ?
+      <> 
       <h1>Spotify React</h1>
-      {!token ? <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>login to spotify</a>  : <h1>Good</h1>}
-      {token ? 
-      <form onSubmit={handlerSubmit}>
-        <input type='text' value={searchKey} onChange={e=>setSearchKey(e.target.value)}></input>
-        <button type='submit'>Search</button>
-      </form> : <h2>cioa</h2>}
-      </div>
+      <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>login to spotify</a>
+      </> : <Spotify token={token}/> }
+    </div>
   );
 }
 
