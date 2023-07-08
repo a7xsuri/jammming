@@ -1,0 +1,7 @@
+.backgroundResults{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.backgroundResults ul{
+    padding: 1rem;
+}
