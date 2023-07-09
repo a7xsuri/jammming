@@ -2,12 +2,12 @@ import React from "react";
 import Track from "./Track";
 import styles from './componentsStyling/SearchResults.module.css'
 
-function SearchResults({result}){
+function SearchResults({result, handlerClick}){
     return(
         <>
         <div className={styles.backgroundResults}>
             <ul>
-                <Track result={result}/>
+                <Track handlerClick={handlerClick} result={result}/>
             </ul>
         </div>
         </>
